@@ -1,0 +1,16 @@
+[Unit]
+Description=Volume and Switch Control Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/volume-control.py
+# restart after 5 seconds
+Restart=always
+RestartSec=5
+# log setting
+StandardOutput=inherit
+StandardError=inherit
+User=root
+
+[Install]
+WantedBy=multi-user.target

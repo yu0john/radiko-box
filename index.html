@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Control Panel</title>
+    <link rel="stylesheet" href="./decoration.css">
+    <link rel="icon" href="./img/UI/favicon.svg">
+    <!-- Icons used here are from https://www.svgrepo.com/ . Big thanks. -->
+</head>
+<body>
+    <section id="header">
+      <h1>Radio Controller</h1>
+      <img id="power-button" src="./img/UI/power.svg" alt="power button" width="32px" height="32px">
+    </section>
+    <section id="nowplaying">
+      <img id="current-station" alt="selected stasion icon" width="300px" height="300px">
+      <div id="ctl-container">
+        <div id="nowInfo">NowPlaying Info</div>
+        <div id="controller">
+          <div id="play-pause" onclick="controller('toggle')">
+            <img src="./img/UI/play.svg" width="32px" height="32px" alt="play">
+            <p>/</p>
+            <img src="./img/UI/pause.svg" width="32px" height="32px" alt="pause">
+          </div>
+          <img src="./img/UI/stop.svg" width="32px" height="32px"
+            onclick="controller('stop')">
+          <div id="volume">
+            <img src="./img/UI/volume.svg" width="32px" height="32px">
+            <p id="current-volume">50</p>
+            <div id="volume-modal">
+              <menu id="volume-list">
+                <li onclick="setVolume(this)">0</li>
+                <li onclick="setVolume(this)">20</li>
+                <li onclick="setVolume(this)">40</li>
+                <li onclick="setVolume(this)">60</li>
+                <li onclick="setVolume(this)">80</li>
+                <li onclick="setVolume(this)">100</li>
+              </menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    </section>
+    <section id="selection">
+      <img src="./img/stations/MBS.jpg" class="station" alt="MBS" onclick="playRadiko('MBS')">
+      <img src="./img/stations/KISSFMKOBE.jpg" class="station" alt="KISS FM KOBE" onclick="playRadiko('KISSFMKOBE')">
+      <!-- template for radiko <img src="./img/stations/default.jpg" class="station" alt="explaination" onclick="playRadiko('ID')"> -->
+
+      <img src="./img/stations/NHK-R1-Osaka.jpg" class="station" alt="NHK OSAKA" 
+        onclick="playOrdinary('NHK R1 Osaka', 'NHK-R1-Osaka', 'https://simul.drdi.st.nhk/live/12/joined/audio/media.m3u8')">
+      <img src="./img/stations/RadioMonster-Evergreens.jpg" class="station" alt="Evergreens" 
+        onclick="playOrdinary('RadioMonster Evergreens', 'RadioMonster-Evergreens', 'https://evergreens.radiomonster.fm/ultra')">
+      <img src="./img/stations/Los40-Classic.jpg" class="station" alt="LOS 40 Classic"
+        onclick="playOrdinary('Los40 Classic', 'Los40-Classic', 'https://28553.live.streamtheworld.com/LOS40_CLASSICAAC_SC')">
+      <img src="./img/stations/rne.jpg" class="station" alt="rne" 
+        onclick="playOrdinary('RNE', 'rne', 'https://rtvelivestream.rtve.es/rtvesec/rne/rne_r1_main.m3u8')">
+      <img src="./img/stations/CBC-RADIO-ONE.jpg" class="station" alt="CBC Radio One" 
+        onclick="playOrdinary('CBC Radio ONE', 'CBC-RADIO-ONE', 'https://cbcradiolive.akamaized.net/hls/live/2041050/ES_R1PVC/adaptive_48/chunklist_ao.m3u8')">
+      <img src="./img/stations/weeb-anime.jpg" class="station" alt="Weeb Anime"
+        onclick="playOrdinary('weeb anime', 'weeb-anime', 'https://play.streamafrica.net/weebanimeradio')">
+      <img src="./img/stations/asia-dream-radio-japan-hits.jpg" class="station" alt="Asia Dream Radio Japan Hits" 
+      onclick="playOrdinary('asia dream radio japan hits', 'asia-dream-radio-japan-hits', 'https://quincy.torontocast.com:2020/stream/1/')">
+      <img src="./img/stations/Jazz-de-Ville-Chill.jpg" class="station" alt="Jazz De Ville Chill" 
+        onclick="playOrdinary('Jazz de Ville Chill', 'Jazz-de-Ville-Chill', 'https://onair22.xdevel.com/proxy/xautocloud_td3e_421?mp=/stream')">
+      <img src="./img/stations/Jazz-de-Ville-Groove.jpg" class="station" alt="Jazz De Ville Groove" 
+        onclick="playOrdinary('Jazz de Ville Groove', 'Jazz-de-Ville-Groove', 'https://onair22.xdevel.com/proxy/xautocloud_1kha_423?mp=/stream')">
+      <img src="./img/stations/RPGN.jpg" class="station" alt="RPGN" 
+        onclick="playOrdinary('RPGN Game Music Radio', 'RPGN', 'http://stream.rpgamers.net:8000/rpgn')"> 
+      <!-- template <img src="./img/stations/default.jpg" class="station" alt="sample" onclick="playOrdinary('name', 'icon', 'url')"> -->
+
+    </section>
+
+    <p id="sys-message">System message output below</p>
+    <div id="status">
+      <p>system messages appear here</p>
+    </div>
+
+    <!-- modals which covers all -->
+    <menu id="power-modal">
+      <li class="shutdown power-select" onclick="powerControl('shutdown')">Shutdown</li>
+      <li class="reboot power-select" onclick="powerControl('reboot')">Reboot</li>
+      <li class="cancel power-select">cancel</li>
+    </menu>
+
+    <div id="power-message">
+      <p>See you again!</p>
+    </div>
+
+    <div id="wave-bg"></div>
+
+    <script src="./shellscripts.js" defer></script>
+    <script src="./utility.js" defer></script>
+
+</body>
+</html>

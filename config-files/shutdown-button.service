@@ -1,0 +1,11 @@
+[Unit]
+Description=Shutdown Button Monitor
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/shutdown.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
