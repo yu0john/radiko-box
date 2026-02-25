@@ -78,7 +78,7 @@ function updateStatus() {
         .then(response => response.text())
         .then(data => {
             console.log('Icon Response: ' + data);
-            currentStation.src = `./img/stations/${data.trim()}.jpg`;
+            currentStation.src = `./img/stations/${data.trim()}.webp`;
             wave.classList.add('playing');
 
             if (data.trim() == "default") {
