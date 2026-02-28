@@ -1,5 +1,41 @@
-const volumeBtn = document.getElementById('volume');
-const volumeModal = document.getElementById('volume-modal');
+// create station list from json file
+fetch("./stationList.json")
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById("selection");
+        data.forEach(station => {
+            const article = document.createElement("article");
+            const imgSrc = `./img/stations/${station.img}.webp`;
+
+            // if description is undefined, use name
+            const description = station.description || station.name;
+
+            // construct image tag
+            const imgTag = document.createElement("img");
+            imgTag.className = "station";
+            imgTag.src = imgSrc;
+            imgTag.alt = station.name;
+
+            if (station.type === "radiko") {
+                // .onclick requires a fucntion (overrides previous .onclick setting)
+                imgTag.onclick = function() {
+                    playRadiko(station.id);
+                };
+            } else {
+                imgTag.onclick = function() {
+                    playOrdinary(station.name, station.img, station.url);
+                };
+            }
+
+            // spawn tags 
+            article.appendChild(imgTag);
+            article.appendChild(document.createElement("p")).textContent = description;
+            container.appendChild(article);
+        });
+    });
+
+const volumeBtn = document.getElementById("volume");
+const volumeModal = document.getElementById("volume-modal");
 
 // toggle volume modal when volume icon is clicked
 volumeBtn.addEventListener("click", () => {
@@ -20,23 +56,23 @@ document.addEventListener("click", (e) => {
 });
 
 
-const powerBtn = document.getElementById('power-button');
-const powerModal = document.getElementById('power-modal');
-const cancelBtn = document.querySelector('#power-modal .cancel');
+const powerBtn = document.getElementById("power-button");
+const powerModal = document.getElementById("power-modal");
+const cancelBtn = document.querySelector("#power-modal .cancel");
 
 // toggle power modal when power icon is clicked
 powerBtn.addEventListener("click", () => {
-    powerModal.classList.add('show');
+    powerModal.classList.add("show");
 });
 
 powerModal.addEventListener("click", (e) => {
     if (e.target === powerModal) {
-        powerModal.classList.remove('show');
+        powerModal.classList.remove("show");
     }
 });
 
 cancelBtn.addEventListener("click", () => {
-    powerModal.classList.remove('show');
+    powerModal.classList.remove("show");
 });
 
 
@@ -45,8 +81,8 @@ updateStatus();
 getVolume();
 
 
-// update now playing info every 5secs and when page loaded
-setInterval(updateStatus, 5000);
+// update now playing info
+setInterval(updateStatus, 10000);
 
 // update current volume regularly
-setInterval(getVolume, 5000);
+setInterval(getVolume, 10000);

@@ -19,7 +19,13 @@ echo "$ID" > /tmp/last_played_icon
        # need to wait until data received
        # adjust sleep length if no sound is heard
        mpc add http://localhost:8080
-       sleep 10
+       mpc play
+
+       sleep 5
+       mpc play
+
+       # just in case
+       sleep 5
        mpc play
 
 ) > /dev/null 2>&1 &
