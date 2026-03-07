@@ -1,7 +1,7 @@
 # radbian: Internet radio receiver on Armbian
 
 ## このプロジェクトの目的
-- 直リンク系インターネットラジオとRadikoの両立ができるオーディオサーバーを作る
+- 直リンク系インターネットラジオとRadikoの両立が再生しやすいオーディオサーバーを作る
 - Armbianを使い、各種SBCで動くシステムを作る
 - Linux、各種ソフトの練習
 
@@ -36,8 +36,7 @@ sudo reboot
 
 コントロールバーは左から再生/一時停止、再生終了、音量調整。
 一番右の数字は現在の音量。アイコンを押すと0-100の数字が表示され、選んだ数値が反映される。
-ボリュームつまみから操作した場合反映に最大10秒かかる。
-
+ボリュームつまみから操作した場合、表示への反映に最大10秒かかる。
 
 画面右上に固定されている電源アイコン押下で電源モーダルが出現。シャットダウンや再起動した場合、Good Bye!が最後の画面となる。
 
@@ -80,8 +79,26 @@ volume-control.pyの`CLK, DT, SW`をピンに対応させる。
 - -: GND
 
 ## 注意点
-自分の **エリア外の放送を聞く方はradikoのサブスクを。** 本来エリアフリー視聴は有料コンテンツ。 [yt-dlp-rajiko](https://427738.xyz/yt-dlp-rajiko/index.ja.html)にも以下の文言あり。
+自分の **エリア外の放送を聞く方はradikoを購読すること。** 本来エリアフリー視聴は有料コンテンツ。 [yt-dlp-rajiko](https://427738.xyz/yt-dlp-rajiko/index.ja.html)にも以下の文言あり。
 
 >個人的なアーカイブを目的としております。商用利用はおやめください。可能であればラジコプレミアムに登録してください。
 
 また、不具合はIssueにてお知らせください。
+
+### 使用した画像
+当プロジェクトで使用した画像やアイコンは以下から拝借し、一部改変してあります。(全2026/03/06アクセス)
+<details>
+<summary>列挙（順不同）</summary>
+
+- [SVGRepo](https://www.svgrepo.com/)
+- [KISS FM KOBE](https://www.kiss-fm.co.jp/)
+- [MBSラジオ(twitter)](https://x.com/1179mbs)
+- [RADIOMONSTER](https://www.radiomonster.fm/)
+- [Box Radio](https://boxradio.net/en)
+- [LOS40 Classic(Youtube)](https://www.youtube.com/c/LOS40Classic) 
+- [NHKラジオ らじる★らじる](https://www.nhk.or.jp/radio/)
+- [TuneIn](https://tunein.com/)
+- [asia dream radio](https://asiadreamradio.com/)
+- [SomaFM](https://somafm.com/)
+- [Jazz de Ville Radio](https://www.jazzdeville.com/)
+</details>
