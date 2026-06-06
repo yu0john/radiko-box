@@ -78,7 +78,7 @@ function updateStatus() {
         .then(response => response.text())
         .then(data => {
             console.log("Icon Response: " + data);
-            currentStation.src = `./img/stations/${data.trim()}.webp`;
+            currentStation.src = `./img/stations/${data.trim()}`;
             wave.classList.add("playing");
 
             if (data.trim() === "Stopped" || data.trim() === "default") {

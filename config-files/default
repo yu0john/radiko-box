@@ -45,10 +45,13 @@ server {
 
 	server_name _;
 
-	location / {
+	location ~ ^/img/stations/(.+)$ {
+		root /var/www/html;
+		
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+
+		try_files try_files /img/stations/$1.webp /img/stations/$1.png /img/stations/$1.jpg /img/stations/$1.jpeg /img/stations/$1.gif /img/stations/$1.svg =404;
 	}
 
 	include /etc/nginx/snippets/cgi-bin.conf;

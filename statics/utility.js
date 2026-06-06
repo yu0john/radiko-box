@@ -5,7 +5,7 @@ fetch("./stationList.json")
         const container = document.getElementById("selection");
         data.forEach(station => {
             const article = document.createElement("article");
-            const imgSrc = `./img/stations/${station.img}.webp`;
+            const imgSrc = `./img/stations/${station.img}`;
 
             // if description is undefined, use name
             const description = station.description || station.name;
