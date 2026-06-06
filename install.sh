@@ -24,19 +24,11 @@ apt update
 apt install -y mpc mpd ffmpeg nginx fcgiwrap avahi-daemon python3-rpi.gpio python3-pip
 pip install -y --break-system-packages yt-dlp yt-dlp-rajiko
 
-# enabling apps launch automatically
-systemctl enable mpd
-systemctl enable nginx
-systemctl enable fcgiwrap
-
-systemctl start mpd
-systemctl start nginx
-systemctl start fcgiwrap
+# enable apps launch automatically
+systemctl enable mpd nginx fcgiwrap avahi-daemon
 
 # change local host name to "radio.local"
 hostnamectl set-hostname radio
-systemctl restart avahi-daemon
-
 
 # placing files
 
@@ -44,64 +36,41 @@ systemctl restart avahi-daemon
 cd "$SCRIPT_DIR"
 mkdir /usr/lib/cgi-bin/
 chmod +x ./sh-files/*
-mv ./sh-files/* /usr/lib/cgi-bin/
+cp ./sh-files/* /usr/lib/cgi-bin/
 
-cd "$SCRIPT_DIR"
+# copy configuration files
 
-# configuration
-
-# add default audio output to mpd.conf
-# first, check if there is already default_output
-if ! grep -q "default_output" /etc/mpd.conf; then
-cat << 'EOF' | sudo tee -a /etc/mpd.conf > /dev/null
-audio_output {
-    type        "alsa"
-    name        "default_output"
-    device      "default"
-    mixer_type  "software"
-}
-EOF
-
-else
-  echo "mpd.conf already has default audio output. Skipping this configuration."
+# mpd config
+if [ -f /etc/mpd.conf ] && [ -f /etc/mpd.conf.bak ]; then
+  cp /etc/mpd.conf /etc/mpd.conf.bak
 fi
+\cp -f ./config-files/mpd.conf /etc/
 
-# write LED blinking setting to rc.local
-# check if already added or not
-if ! grep -q "pwr_led/delay_on" /etc/rc.local; then
-  # insert sentences before "exit 0"
-  sed -i '/^exit 0/i # 2s/1s ON/OFF LED connected to GPIO24\necho 2000 > /sys/class/leds/pwr_led/delay_on\necho 1000 > /sys/class/leds/pwr_led/delay_off\n' /etc/rc.local
-
-else
-  echo "LED configuration already exists in rc.local. Skipping."
+# LED blinking config
+if [ -f /etc/rc.local ] && [ -f /etc/rc.local.bak ]; then 
+  cp /etc/rc.local /etc/rc.local.bak
 fi
-# change to executable just in case
-chmod +x /etc/rc.local
-
+\cp -f ./config-files/rc.local /etc/
 
 # nginx settings
 # locate extra config file
-mv ./config-files/cgi-bin.conf /etc/nginx/snippets/
+cp -f ./config-files/cgi-bin.conf /etc/nginx/snippets/
 
-# check if default file has "include" line for additional setting
-if ! grep -q "include /etc/nginx/snippets/cgi-bin.conf;" /etc/nginx/sites-available/default; then
-  # insert sentence just after server {
-  sed -i '/^server {/a \    include /etc/nginx/snippets/cgi-bin.conf;' /etc/nginx/sites-available/default
-else
-  echo "Nginx is already linked to cgi-bin config."
+# link cgi-bin.conf to nginx
+if [ -f /etc/nignx/sites-available/default ] && [ -f /etc/nignx/sites-available/default.bak ]; then 
+  cp /etc/nignx/sites-available/default /etc/nignx/sites-available/default.bak
 fi
-# review syntax and reload settings
-sudo nginx -t && sudo systemctl reload nginx
+\cp -f ./config-files/default /etc/nignx/sites-available/default
 
 # stopping a bothering system app
 mkdir /etc/systemd/system/systemd-networkd-wait-online.service.d/
-mv ./config-files/override.conf /etc/systemd/system/systemd-networkd-wait-online.service.d/
+cp ./config-files/override.conf /etc/systemd/system/systemd-networkd-wait-online.service.d/
 
 # python files for physical buttons
 cd "$SCRIPT_DIR"
 chmod +x ./config-files/*.py
-mv ./*.py /usr/local/bin/
-mv ./*.service /etc/systemd/system/
+cp ./*.py /usr/local/bin/
+cp ./*.service /etc/systemd/system/
 # load and enable services
 systemctl daemon-reload
 systemctl enable shutdown-button.service
@@ -110,11 +79,13 @@ systemctl enable volume-control.service
 
 
 # nginx files
-mv ./* /var/www/html/
+cp ./* /var/www/html/
 
 
 # LED light setting
 echo 'dtoverlay=gpio-led,gpio=24,label=pwr_led,trigger=timer' | tee -a /boot/firmware/config.txt
 
-
+echo "Configuration completed. Reboot system."
+sleep 2000
+reboot
 
