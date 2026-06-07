@@ -18,13 +18,9 @@ fetch("./stationList.json")
 
             if (station.type === "radiko") {
                 // .onclick requires a fucntion (overrides previous .onclick setting)
-                imgTag.onclick = function() {
-                    playRadiko(station.id);
-                };
+                imgTag.onclick = () => playRadiko(station.id);
             } else {
-                imgTag.onclick = function() {
-                    playOrdinary(station.name, station.img, station.url);
-                };
+                imgTag.onclick = () => playOrdinary(station.name, station.img, station.url);
             }
 
             // spawn tags 
