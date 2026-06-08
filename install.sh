@@ -22,23 +22,34 @@ cd "$SCRIPT_DIR"
 # install apps required
 apt update
 apt install -y mpc mpd ffmpeg nginx fcgiwrap avahi-daemon python3-rpi.gpio python3-pip
-pip install -y --break-system-packages yt-dlp yt-dlp-rajiko
+pip install --break-system-packages yt-dlp yt-dlp-rajiko
+echo "apps installed"
 
 # enable apps launch automatically
 systemctl enable mpd nginx fcgiwrap avahi-daemon
 
 # change local host name to "radio.local"
+echo "setting hostname to radio..."
 hostnamectl set-hostname radio
 
 # placing files
 
 # move shellscripts
 cd "$SCRIPT_DIR"
+echo "placing shellscripts..."
 mkdir /usr/lib/cgi-bin/
 chmod +x ./sh-files/*
 cp ./sh-files/* /usr/lib/cgi-bin/
 
+# let nginx reboot and shutdown
+echo "give reboot and shutdown permission to nginx..."
+SHUTDOWN_PATH=$(which shutdown)
+REBOOT_PATH=$(which reboot)
+echo "www-data ALL=(ALL) NOPASSWD: ${SHUTDOWN_PATH}, ${REBOOT_PATH}" | sudo tee /etc/sudoers.d/nginx-shutdown > /dev/null
+chmod 0440 /etc/sudoers.d/nginx-shutdown
+
 # copy configuration files
+echo "copying config files..."
 
 # mpd config
 if [ -f /etc/mpd.conf ] && [ -f /etc/mpd.conf.bak ]; then
@@ -57,35 +68,35 @@ fi
 cp -f ./config-files/cgi-bin.conf /etc/nginx/snippets/
 
 # link cgi-bin.conf to nginx
-if [ -f /etc/nignx/sites-available/default ] && [ -f /etc/nignx/sites-available/default.bak ]; then 
-  cp /etc/nignx/sites-available/default /etc/nignx/sites-available/default.bak
+if [ -f /etc/nginx/sites-available/default ] && [ -f /etc/nginx/sites-available/default.bak ]; then 
+  cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 fi
-\cp -f ./config-files/default /etc/nignx/sites-available/default
+\cp -f ./config-files/default /etc/nginx/sites-available/default
 
 # stopping a bothering system app
-mkdir /etc/systemd/system/systemd-networkd-wait-online.service.d/
-cp ./config-files/override.conf /etc/systemd/system/systemd-networkd-wait-online.service.d/
+#mkdir /etc/systemd/system/systemd-networkd-wait-online.service.d/
+#cp ./config-files/override.conf /etc/systemd/system/systemd-networkd-wait-online.service.d/
 
+echo "setting GPIO..."
 # python files for physical buttons
 cd "$SCRIPT_DIR"
 chmod +x ./config-files/*.py
-cp ./*.py /usr/local/bin/
-cp ./*.service /etc/systemd/system/
+cp ./config-files/*.py /usr/local/bin/
+cp ./config-files/*.service /etc/systemd/system/
+
 # load and enable services
 systemctl daemon-reload
-systemctl enable shutdown-button.service
-systemctl enable volume-control.service
+systemctl enable shutdown-button.service volume-control.service
 # services start automatically after reboot
 
-
 # nginx files
-cp ./* /var/www/html/
-
+cp ./statics/* /var/www/html/
+cp -r ./img /var/www/html/
+cp -r ./font /var/www/html/
 
 # LED light setting
-echo 'dtoverlay=gpio-led,gpio=24,label=pwr_led,trigger=timer' | tee -a /boot/firmware/config.txt
+echo "dtoverlay=gpio-led,gpio=24,label=pwr_led,trigger=timer" | sudo tee -a /boot/firmware/config.txt > /dev/null
 
-echo "Configuration completed. Reboot system."
-sleep 2000
-reboot
+echo "Configuration finished. Please reboot system."
+
 

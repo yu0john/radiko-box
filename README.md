@@ -19,10 +19,10 @@ sudo apt -y update
 sudo apt -y upgrade
 ```
 次に、このリポジトリから必要なファイルとインストールスクリプトを取得、実行。  
-スクリプトの最後で再起動がかかり、ローカルサーバーへのアクセスが可能になる。
+スクリプトが終了したら再起動をかける。
 ```
 git clone https://github.com/yu0john/radbian
-cd ./radbian/sh-files
+cd ./radbian
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ```

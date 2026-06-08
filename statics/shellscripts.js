@@ -66,6 +66,7 @@ function setVolume(value) {
 function updateStatus() {
     const nowInfo = document.getElementById("nowInfo")
     const wave = document.getElementById("wave-bg");
+    const defaultIcon = "default";
 
     // update letters
     fetch("/cgi-bin/nowplaying.sh")
@@ -83,12 +84,12 @@ function updateStatus() {
 
             if (data.trim() === "Stopped" || data.trim() === "default") {
                 wave.classList.remove("playing");
-                currentStation.src = "./img/stations/music.svg"
+                currentStation.src = "./img/stations/" + defaultIcon;
             }
         })
         .catch( () => {
             // fail safe
-            currentStation.src = "./img/stations/music.svg"
+            currentStation.src = "./img/stations/" + defaultIcon
         });
 }
 
