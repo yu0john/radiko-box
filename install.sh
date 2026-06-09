@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#############################################################################
-# This is installation script.                                              #
-# Installs software used for the radbian and places pre-configured files.   #
-#############################################################################
+########################################################################
+# This is installation script.                                         #
+# Installs software and places pre-configured files.                #
+########################################################################
 
 # root check
 if [ "$EUID" -ne 0 ]; then
