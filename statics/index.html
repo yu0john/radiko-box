@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Control Panel</title>
+    <link rel="stylesheet" href="./decoration.css">
+    <link rel="icon" href="./img/UI/favicon.svg">
+    <!-- Icons used here are from https://www.svgrepo.com/ . Big thanks. -->
+    <!-- Also station icons are taken from each stations, some are modified by yu-john to be identified easily. Don't use them again in other places. -->
+</head>
+<body>
+    <section id="header">
+      <h1>Radio Controller</h1>
+      <img id="power-button" src="./img/UI/power.svg" alt="power button" width="32px" height="32px">
+    </section>
+    <section id="nowplaying">
+      <img id="current-station" alt="selected stasion icon" width="300px" height="300px">
+      <div id="ctl-container">
+        <div id="nowInfo">NowPlaying Info</div>
+        <div id="controller">
+          <div id="play-pause" onclick="controller('toggle')">
+            <img src="./img/UI/play.svg" width="32px" height="32px" alt="play">
+            <img src="./img/UI/slash.svg" alt="">
+            <img src="./img/UI/pause.svg" width="32px" height="32px" alt="pause">
+          </div>
+          <img src="./img/UI/stop.svg" width="32px" height="32px"
+            onclick="controller('stop')">
+          <div id="volume">
+            <img src="./img/UI/volume.svg" width="32px" height="32px">
+            <p id="current-volume">50</p>
+            <div id="volume-modal">
+              <menu id="volume-list">
+                <li onclick="setVolume(this)">0</li>
+                <li onclick="setVolume(this)">20</li>
+                <li onclick="setVolume(this)">40</li>
+                <li onclick="setVolume(this)">60</li>
+                <li onclick="setVolume(this)">80</li>
+                <li onclick="setVolume(this)">100</li>
+              </menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="selection">
+    </section>
+
+    <p id="sys-message">System message output below</p>
+    <div id="status">
+      <p>system messages appear here</p>
+    </div>
+
+    <!-- modals which covers all -->
+    <menu id="power-modal">
+      <li class="shutdown power-select" onclick="powerControl('shutdown')">Shutdown</li>
+      <li class="reboot power-select" onclick="powerControl('reboot')">Reboot</li>
+      <li class="cancel power-select">cancel</li>
+    </menu>
+
+    <div id="power-message">
+      <p>See you again!</p>
+    </div>
+
+    <div id="wave-bg"></div>
+
+    <script src="./shellscripts.js" defer></script>
+    <script src="./utility.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+/* Icons used here are from https://www.svgrepo.com/ . Super thanks. */
+
+:root {
+    --color-background: rgb(38, 38, 38);
+    --color-background-second: rgb(44, 66, 37);
+    --color-text: rgb(226, 232, 206);
+    --color-pop: rgb(255, 127, 17);
+    --color-log: rgba(172, 191, 164, 0.5);
+    --color-controller-dark: rgba(44, 66, 37, 0.8);
+    --color-controller-light: rgba(226, 232, 206, 0.8);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+	src: url(./font/montserrat-black.otf);
+    font-display: swap;
+}
+
+html {
+    background: linear-gradient(90deg, var(--color-background) , var(--color-background-second));
+    font-size: 18px;
+}
+
+body {
+    width: 90%;
+    margin-inline: auto;
+    color: #E2E8CE;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+h1 {
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+    border-bottom: var(--color-text) 2px solid;
+    padding: 0 2rem;
+}
+
+#header {
+    position: relative;
+}
+
+#power-button {
+    position: absolute;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#power-modal {
+    list-style: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: var(--color-controller-dark);
+
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+#power-modal.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+#power-modal li {
+    font-size: 2rem;
+    padding: 1em ;
+    margin: 1em 0;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 5em;
+    text-align: center;
+}
+
+.power-select:hover {
+    background-color: var(--color-pop);
+}
+
+#power-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: linear-gradient(90deg, var(--color-background) , var(--color-background-second));
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+#power-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#power-message > p {
+    font-size: 2.5rem;
+    text-align: center;
+    line-height: 2;
+}
+
+
+.shutdown {
+    background-image: url(./img/UI/power.svg);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.reboot {
+    background-image: url(./img/UI/reboot.svg);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cancel {
+    color: var(--color-background);
+    background: var(--color-controller-light);
+    /* background-image: url(./img/UI/music.svg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; */
+}
+
+.cancel:hover {
+    color: var(--color-text);
+}
+
+
+#nowplaying {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+@media screen and (max-width: 737px) {
+    #nowplaying {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+#nowInfo {
+    font-size: 1.5rem;
+}
+
+
+#current-station {
+    width: 300px;
+    height: 300px;
+    background-color: var(--color-log);
+    border-radius: 10px;
+}
+
+#ctl-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 0 1em;
+}
+
+#controller {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width: 737px) {
+    #controller {
+        width: 100%;
+        position: fixed;
+        padding: 1rem 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        background: var(--color-controller-dark);
+    }
+}
+
+#controller img,
+#play-pause,
+#volume {
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    height: 32px;
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+#play-pause p {
+    text-align: center;
+    font-weight: bold;
+    height: inherit;
+    line-height: 1;
+}
+
+#volume {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    line-height: 1;
+}
+ 
+#volume > img,
+#volume > p {
+    opacity: 1;
+}
+
+#volume.active > img,
+#volume.active > p {
+    opacity: 0;
+}
+
+/* volume modal setting */
+#volume-modal {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
+    display: inline-block;
+    padding: 1em;
+    background: var(--color-controller-light);
+    border-radius: 5px;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opaticy 0.2s ease, transform 0.2s ease;
+
+}
+
+@media screen and (max-width: 737px) {
+    #volume-modal {
+        transform: translateY(10px);
+        top: auto;
+        bottom: 0;
+    }
+}
+
+#volume-modal.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#volume-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 737px) {
+    #volume-list {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+#volume-list li {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0.5rem 0;
+    color: var(--color-background);
+    border-radius: 5px;
+}
+
+#volume-list li:hover {
+    background: var(--color-pop);
+}
+
+/* volume modal setting ends */
+
+
+#selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    column-gap: 32px;
+    row-gap: 32px;
+    justify-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-text);
+    
+    color: var(--color-text);
+    text-align: center;
+}
+
+@media screen and (max-width: 737px) {
+    #selection {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        justify-content: unset;
+        column-gap: 16px;
+        row-gap: 1.5em;
+    }
+}
+
+.station {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    transition: transform 0.05s ease, filter 0.05s ease;
+}
+
+@media screen and (max-width: 737px) {
+    .station {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+.station:active {
+    transform: translateY(5px);
+    filter: opacity(0.7);
+}
+
+#sys-message {
+    color: var(--color-pop);
+
+}
+
+#status {
+    margin: 0;
+    color: var(--color-log);
+}
+
+
+
+#wave-bg {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 200%;
+    height: 80px;
+    z-index: -1;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C300,0 300,120 600,60 C900,0 900,120 1200,60 L1200,0 L0,0 Z" fill="RGB(38 38 38)" opacity="0.8"/></svg>');
+    background-size: 50% 100%;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+#wave-bg.playing {
+    opacity: 1;
+    visibility: visible;
+    animation: wave-scroll 3s linear infinite, wave-in 1s ease;
+}
+
+@keyframes wave-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+@keyframes wave-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}

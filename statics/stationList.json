@@ -1,0 +1,100 @@
+[
+  {
+    "type": "radiko",
+    "id": "KISSFMKOBE",
+    "name": "KISS FM KOBE",
+    "img": "KISSFMKOBE",
+    "description": ""
+  },
+  {
+    "type": "radiko",
+    "id": "MBS",
+    "name": "MBS",
+    "img": "MBS",
+    "description": "MBS Radio"
+  },
+  {
+    "type": "ordinary",
+    "name": "NHK R1 Osaka",
+    "img": "NHK-R1-Osaka",
+    "url": "https://simul.drdi.st.nhk/live/12/joined/audio/media.m3u8",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "RadioMonster Evergreen",
+    "img": "RadioMonster-Evergreens",
+    "url": "https://evergreens.radiomonster.fm/ultra",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "Los40 Classic",
+    "img": "Los40-Classic",
+    "url": "https://28553.live.streamtheworld.com/LOS40_CLASSICAAC_SC",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "rne",
+    "img": "rne",
+    "url": "https://rtvelivestream.rtve.es/rtvesec/rne/rne_r1_main.m3u8",
+    "description": "Radio Nacional Española"
+  },
+  {
+    "type": "ordinary",
+    "name": "CBC Radio One",
+    "img": "CBC-RADIO-ONE",
+    "url": "https://cbcradiolive.akamaized.net/hls/live/2041050/ES_R1PVC/adaptive_48/chunklist_ao.m3u8",
+    "description": "CBC Radio One Vancouver"
+  },
+  {
+    "type": "ordinary",
+    "name": "weeb anime",
+    "img": "weeb-anime",
+    "url": "https://play.streamafrica.net/weebanimeradio",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "asia dream radio japan hits",
+    "img": "asia-dream-radio-japan-hits",
+    "url": "https://quincy.torontocast.com:2020/stream/1/",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "Jazz de Ville Chill",
+    "img": "Jazz-de-Ville-Chill",
+    "url": "https://onair22.xdevel.com/proxy/xautocloud_td3e_421?mp=/stream",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "Jazz de Ville Groove",
+    "img": "Jazz-de-Ville-Groove",
+    "url": "https://onair22.xdevel.com/proxy/xautocloud_1kha_423?mp=/stream",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "RPGN Game Music Radio",
+    "img": "RPGN",
+    "url": "http://stream.rpgamers.net:8000/rpgn",
+    "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "Bossa Beyond",
+    "img": "Bossa-Beyond",
+    "url": "https://ice4.somafm.com/bossa-64-aac",
+    "description": "SomaFM Bossa Beyond"
+  },
+  {
+    "type": "ordinary",
+    "name": "Lofi Radio",
+    "img": "lofi-radio",
+    "url": "https://play.streamafrica.net/lofiradio",
+    "description": ""
+  }
+]

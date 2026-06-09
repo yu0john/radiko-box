@@ -1,0 +1,19 @@
+# KDE / Dolphin settings
+.directory
+
+# Editor backups and swap files
+*~
+*.swp
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+tmp/
+
+# Security (Future proofing)
+.env
