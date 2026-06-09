@@ -11,8 +11,8 @@
 }
 
 @font-face {
-    font-family: 'Milker';
-	src: url(./font/Milker.otf);
+    font-family: 'Montserrat';
+	src: url(./font/montserrat-black.otf);
     font-display: swap;
 }
 
@@ -33,9 +33,9 @@ h1 {
     margin-inline: auto;
     margin-bottom: 2rem;
     text-align: center;
-    font-family: 'Milker', sans-serif; 
+    font-family: 'Montserrat', sans-serif; 
     border-bottom: var(--color-text) 2px solid;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
 }
 
 #header {

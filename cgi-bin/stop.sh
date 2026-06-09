@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # CGI header
 echo "Content-type: text/plain"

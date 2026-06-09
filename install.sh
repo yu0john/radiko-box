@@ -37,9 +37,8 @@ hostnamectl set-hostname radio
 # move shellscripts
 cd "$SCRIPT_DIR"
 echo "placing shellscripts..."
-mkdir /usr/lib/cgi-bin/
-chmod +x ./sh-files/*
-cp ./sh-files/* /usr/lib/cgi-bin/
+chmod +x ./cgi-bin/*
+cp -r ./cgi-bin /usr/lib/
 
 # let nginx reboot and shutdown
 echo "give reboot and shutdown permission to nginx..."
@@ -72,10 +71,6 @@ if [ -f /etc/nginx/sites-available/default ] && [ -f /etc/nginx/sites-available/
   cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 fi
 \cp -f ./config-files/default /etc/nginx/sites-available/default
-
-# stopping a bothering system app
-#mkdir /etc/systemd/system/systemd-networkd-wait-online.service.d/
-#cp ./config-files/override.conf /etc/systemd/system/systemd-networkd-wait-online.service.d/
 
 echo "setting GPIO..."
 # python files for physical buttons
