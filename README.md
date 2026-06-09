@@ -1,4 +1,4 @@
-# radbian: Internet radio receiver on Armbian
+# radiko-box: Internet radio receiver on Armbian
 
 ## このプロジェクトの目的
 - 直リンク系インターネットラジオとRadikoの両方が再生しやすいオーディオサーバーを作る
@@ -26,8 +26,8 @@ sudo apt -y upgrade
 スクリプト終了後に再起動をかければ完了。
 
 ```
-git clone https://github.com/yu0john/radbian
-cd ./radbian
+git clone https://github.com/yu0john/radiko-box
+cd ./radiko-box
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ```
