@@ -18,14 +18,15 @@ function controller(scriptName) {
 }
 
 // call radiko.sh with station ID
-function playRadiko(url) {
+function playRadiko(name, icon, id) {
     // const status = document.getElementById("status");
-    status.innerText = "Connecting to Radiko: " + url + "...";
+    const targetRadiko = `/cgi-bin/radiko.sh?name=${encodeURIComponent(name)}&icon=${encodeURIComponent(icon)}&id=${encodeURIComponent(id)}`
+    status.innerText = "Connecting to Radiko: " + name + "...";
 
     // pass URL to shell
-    fetch("/cgi-bin/radiko.sh?url=" + url)
+    fetch(targetRadiko)
         .then(response => response.text())
-        .then(data => { status.innerText = data + "Playing Radiko: " + url })
+        .then(data => { status.innerText = data + "Playing Radiko: " + name })
         .catch(error => { status.innerText = "Error: " + error; });
 }
 
