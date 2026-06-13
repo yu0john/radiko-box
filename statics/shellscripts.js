@@ -1,19 +1,20 @@
 const status = document.getElementById("status");
 const currentVolume = document.getElementById("current-volume");
 const currentStation = document.getElementById("current-station");
+const defaultIcon = "default";
 
 // controller to call toggle and stop.sh
 function controller(scriptName) {
     // const status = document.getElementById("status");
     status.innerText = "Processing: " + scriptName + "...";
-    // 
+
     fetch("/cgi-bin/" + scriptName + ".sh")
         .then(response => response.text())
         .then(data => { status.innerText = "Done: " + data; })
         .catch(error => { status.innerText = "Error: " + error; });
     
     if (scriptName === "stop") {
-        currentStation.src = "./img/stations/music.svg";
+        currentStation.src = "./img/stations/" + defaultIcon;
     }
 }
 
@@ -67,7 +68,6 @@ function setVolume(value) {
 function updateStatus() {
     const nowInfo = document.getElementById("nowInfo")
     const wave = document.getElementById("wave-bg");
-    const defaultIcon = "default";
 
     // update letters
     fetch("/cgi-bin/nowplaying.sh")
