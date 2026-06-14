@@ -1,31 +1,32 @@
 const status = document.getElementById("status");
 const currentVolume = document.getElementById("current-volume");
 const currentStation = document.getElementById("current-station");
+const defaultIcon = "default";
 
 // controller to call toggle and stop.sh
 function controller(scriptName) {
     // const status = document.getElementById("status");
     status.innerText = "Processing: " + scriptName + "...";
-    // 
     fetch("/cgi-bin/" + scriptName + ".sh")
         .then(response => response.text())
         .then(data => { status.innerText = "Done: " + data; })
         .catch(error => { status.innerText = "Error: " + error; });
     
     if (scriptName === "stop") {
-        currentStation.src = "./img/stations/music.svg";
+        currentStation.src = "./img/stations/" + defaultIcon;
     }
 }
 
 // call radiko.sh with station ID
-function playRadiko(url) {
+function playRadiko(name, icon, id) {
     // const status = document.getElementById("status");
-    status.innerText = "Connecting to Radiko: " + url + "...";
+    const targetRadiko = `/cgi-bin/radiko.sh?name=${encodeURIComponent(name)}&icon=${encodeURIComponent(icon)}&id=${encodeURIComponent(id)}`
+    status.innerText = "Connecting to Radiko: " + name + "...";
 
     // pass URL to shell
-    fetch("/cgi-bin/radiko.sh?url=" + url)
+    fetch(targetRadiko)
         .then(response => response.text())
-        .then(data => { status.innerText = data + "Playing Radiko: " + url })
+        .then(data => { status.innerText = data + "Playing Radiko: " + name })
         .catch(error => { status.innerText = "Error: " + error; });
 }
 
@@ -66,7 +67,6 @@ function setVolume(value) {
 function updateStatus() {
     const nowInfo = document.getElementById("nowInfo")
     const wave = document.getElementById("wave-bg");
-    const defaultIcon = "default";
 
     // update letters
     fetch("/cgi-bin/nowplaying.sh")

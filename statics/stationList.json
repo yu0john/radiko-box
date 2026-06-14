@@ -14,10 +14,10 @@
     "description": "MBS Radio"
   },
   {
-    "type": "ordinary",
-    "name": "NHK R1 Osaka",
-    "img": "NHK-R1-Osaka",
-    "url": "https://simul.drdi.st.nhk/live/12/joined/audio/media.m3u8",
+    "type": "radiko",
+    "id": "JOBK",
+    "name": "NHK AM",
+    "img": "NHK-AM",
     "description": ""
   },
   {
