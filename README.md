@@ -6,10 +6,10 @@
 - Linux、各種ソフトの練習
 
 ## 使用している主なソフト（感謝）
-- yt-dlp (+ yt-dlp-rajiko)
-- MPD
-- ffmpeg
-- nginx + fcgiwrap
+- [yt-dlp](https://github.com/garret1317/yt-dlp-rajiko) (+ [yt-dlp-rajiko](https://github.com/yt-dlp/yt-dlp))
+- [MPD](https://www.musicpd.org/)
+- [ffmpeg](https://www.ffmpeg.org/)
+- [nginx](https://nginx.org/) + [fcgiwrap](https://github.com/gnosek/fcgiwrap)
 
 ## インストール方法
 OSは<u>Armbian</u>を想定。
