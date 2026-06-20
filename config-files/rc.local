@@ -11,4 +11,7 @@
 #
 # By default this script does nothing.
 
+echo 2000 > /sys/class/leds/pwr_led/delay_on
+echo 1000 > /sys/class/leds/pwr_led/delay_off
+
 exit 0
