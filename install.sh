@@ -21,7 +21,7 @@ cd "$SCRIPT_DIR"
 
 # install apps required
 apt update
-apt install -y mpc mpd ffmpeg nginx fcgiwrap avahi-daemon python3-rpi.gpio python3-pip
+apt install -y mpc mpd ffmpeg nginx fcgiwrap avahi-daemon python3-rpi.gpio python3-pip libxml2-utils
 pip install --break-system-packages yt-dlp yt-dlp-rajiko
 echo "apps installed"
 

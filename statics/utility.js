@@ -78,7 +78,7 @@ getVolume();
 
 
 // update now playing info
-setInterval(updateStatus, 10000);
+setInterval(updateStatus, 20000);
 
 // update current volume regularly
-setInterval(getVolume, 10000);
+setInterval(getVolume, 5000);

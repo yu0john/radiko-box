@@ -69,17 +69,17 @@ function updateStatus() {
     const nowInfo = document.getElementById("nowInfo")
     const wave = document.getElementById("wave-bg");
 
-    // update letters
+    // update current info of music or station
     fetch("/cgi-bin/nowplaying.sh")
         .then(response => response.text())
-        .then(data => nowInfo.innerText = data)
+        .then(data => nowInfo.innerText = data.split(":").at(-1))
         .catch(error => status.innerText = "Error:" + error);
-
+    }
+    
     //update station img
     fetch("/cgi-bin/get-icon.sh")
         .then(response => response.text())
         .then(data => {
-            console.log("Icon Response: " + data);
             currentStation.src = `./img/stations/${data.trim()}`;
             wave.classList.add("playing");
 
@@ -92,7 +92,6 @@ function updateStatus() {
             // fail safe
             currentStation.src = "./img/stations/" + defaultIcon
         });
-}
 
 
 function powerControl(select) {
@@ -113,5 +112,6 @@ function powerControl(select) {
 
     fetch("/cgi-bin/" + select + ".sh")
         .then(powerMessage.classList.add("show"))
+        .then(console.log(select + " executed."))
         .catch(error => status.innerText = "Error: " + error);
 }
