@@ -2,7 +2,7 @@
 
 ########################################################################
 # This is installation script.                                         #
-# Installs software and places pre-configured files.                #
+# Installs software and places pre-configured files.                   #
 ########################################################################
 
 # root check
@@ -37,7 +37,6 @@ hostnamectl set-hostname radio
 # move shellscripts
 cd "$SCRIPT_DIR"
 echo "placing shellscripts..."
-chmod a+x ./cgi-bin/get-radiko-xml.sh
 chmod a+x ./cgi-bin/*
 cp -r ./cgi-bin /usr/lib/
 

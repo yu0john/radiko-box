@@ -2,16 +2,21 @@ const status = document.getElementById("status");
 const currentVolume = document.getElementById("current-volume");
 const currentStation = document.getElementById("current-station");
 const defaultIcon = "default";
+const nowInfo = document.getElementById("nowInfo")
+const wave = document.getElementById("wave-bg");
 
 // controller to call toggle and stop.sh
 function controller(scriptName) {
-    // const status = document.getElementById("status");
     status.innerText = "Processing: " + scriptName + "...";
 
     fetch("/cgi-bin/" + scriptName + ".sh")
         .then(response => response.text())
-        .then(data => { status.innerText = "Done: " + data; })
-        .catch(error => { status.innerText = "Error: " + error; });
+        .then(data => {
+            status.innerText = "Done: " + data;
+        })
+        .catch(error => {
+            status.innerText = "Error: " + error;
+        });
     
     if (scriptName === "stop") {
         currentStation.src = "./img/stations/" + defaultIcon;
@@ -20,27 +25,30 @@ function controller(scriptName) {
 
 // call radiko.sh with station ID
 function playRadiko(name, icon, id) {
-    // const status = document.getElementById("status");
     const targetRadiko = `/cgi-bin/radiko.sh?name=${encodeURIComponent(name)}&icon=${encodeURIComponent(icon)}&id=${encodeURIComponent(id)}`
-    status.innerText = "Connecting to Radiko: " + name + "...";
+    status.innerText = "Connecting to radiko: " + name + "...";
 
     // pass URL to shell
     fetch(targetRadiko)
         .then(response => response.text())
-        .then(data => { status.innerText = data + "Playing Radiko: " + name })
-        .catch(error => { status.innerText = "Error: " + error; });
+        .then(data => {
+            status.innerText = data + "Playing radiko: " + name;
+            updateStatus();
+        })
+        .catch(error => {
+            status.innerText = "Error: " + error;
+        });
 }
 
 // call play-ordinary.sh with URL
 function playOrdinary(name, icon, url) {
-    // const status = document.getElementById("status");
     status.innerText = "Loading Stream: " + name + "...";
     const targetUrl = `/cgi-bin/play-ordinary.sh?url=${encodeURIComponent(url)}&name=${encodeURIComponent(name)}&icon=${encodeURIComponent(icon)}`; 
     // encodeURIComponent converts words like &? into understandable style
     fetch(targetUrl)
         .then(response => response.text())
         .then(data => {
-            status.innerText = "Playing Stream: " + name; 
+            status.innerText = "Playing Stream: " + name;
             updateStatus();
         })
         .catch(error => {
@@ -52,8 +60,12 @@ function playOrdinary(name, icon, url) {
 function getVolume() {
     fetch("/cgi-bin/get-volume.sh")
         .then(response => response.text())
-        .then(data => { currentVolume.innerText = data; })
-        .catch(error => { status.innerText = "Error: " + error; });     
+        .then(data => {
+            currentVolume.innerText = data;
+        })
+        .catch(error => {
+            status.innerText = "Error: " + error;
+        });
 }
 
 // set volume using volume modal
@@ -65,24 +77,23 @@ function setVolume(value) {
 
 
 // update now playing info
-function updateStatus() {
-    const nowInfo = document.getElementById("nowInfo")
-    const wave = document.getElementById("wave-bg");
-
+function updateStatus() { 
     // update current info of music or station
     fetch("/cgi-bin/nowplaying.sh")
         .then(response => response.text())
-        .then(data => nowInfo.innerText = data.split(":").at(-1))
-        .catch(error => status.innerText = "Error:" + error);
-    }
-    
+        .then(data => {
+            nowInfo.innerText = data.split(":").at(-1);
+        })
+        .catch(error => {
+            status.innerText = "Error:" + error;
+        });
+
     //update station img
     fetch("/cgi-bin/get-icon.sh")
         .then(response => response.text())
         .then(data => {
             currentStation.src = `./img/stations/${data.trim()}`;
-            wave.classList.add("playing");
-
+            wave.classList.add("playing"); 
             if (data.trim() === "Stopped" || data.trim() === "default") {
                 wave.classList.remove("playing");
                 currentStation.src = "./img/stations/" + defaultIcon;
@@ -92,6 +103,7 @@ function updateStatus() {
             // fail safe
             currentStation.src = "./img/stations/" + defaultIcon
         });
+}
 
 
 function powerControl(select) {
@@ -113,5 +125,7 @@ function powerControl(select) {
     fetch("/cgi-bin/" + select + ".sh")
         .then(powerMessage.classList.add("show"))
         .then(console.log(select + " executed."))
-        .catch(error => status.innerText = "Error: " + error);
+        .catch(error => {
+            status.innerText = "Error: " + error;
+        });
 }

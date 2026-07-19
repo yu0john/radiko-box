@@ -10,15 +10,15 @@ DATE=${RADIKO_DATE:0:8}
 DIRECTORY="/tmp"
 
 # get station ID from json file
-STATIONS=$(jq -r ".[].id // empty" /var/www/html/stationList.json)
+STATIONS=$(./scan-stationList.sh)
 
 for STATION in ${STATIONS[@]}; do
     if [ -n "$STATION" ] && [ "$STATION" != "null" ]; then # remove empty name and "null" just in case
         echo "fetching ${STATION}_${DATE}.xml... to ${DIRECTORY}"
-        curl -s "https://radiko.jp/v3/program/station/date/${DATE}/${STATION}.xml" > "${DIRECTORY}/${STATION}_${DATE}.xml"
+        curl -s --compressed "https://radiko.jp/v3/program/station/date/${DATE}/${STATION}.xml" > "${DIRECTORY}/${STATION}_${DATE}.xml"
     else
         echo "requested xml not found"
     fi
 
-    sleep 1
+    sleep 0.5
 done

@@ -3,7 +3,7 @@
 # kill previous processes
 source /usr/lib/cgi-bin/stop.sh
 
-echo "Starting Radiko... please wait for 5-10 seconds"
+echo "Starting radiko... please wait for 5-10 seconds"
 
 # remove url= from string
 # ej.: url=LFR -> LFR)
@@ -11,8 +11,9 @@ NAME=$(echo "$QUERY_STRING" | sed -n 's/.*name=\([^&]*\).*/\1/p' | sed 's/%\([0-
 ICON=$(echo "$QUERY_STRING" | sed -n 's/.*icon=\([^&]*\).*/\1/p' | sed 's/%\([0-9A-F][0-9A-F]\)/\\x\1/g;s/+/ /g' | xargs -0 echo -e)
 ID=$(echo "$QUERY_STRING" | sed -n 's/.*id=\([^&]*\).*/\1/p' | sed 's/%\([0-9A-F][0-9A-F]\)/\\x\1/g;s/+/ /g' | xargs -0 echo -e)
 
-echo "Radiko: $NAME" > /tmp/last_played
+echo "radiko: $NAME" > /tmp/last_played
 echo "$ICON" > /tmp/last_played_icon
+echo "$ID" > /tmp/last_played_radiko
 
 (
        # start streaming as local HTTP with ffmpeg
