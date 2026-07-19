@@ -7,19 +7,20 @@ RADIKO_ID=$(echo "$QUERY_STRING" | sed -n 's/^.*url=\([^&]*\).*$/\1/p' | sed "s/
 # check raw status
 MPC_OUT=$(mpc current)
 RADIKO_SCRIPT=$(./radiko-program-info.sh)
-DATE=${date '+%Y%m%d'}
-RADIKO_XML="/tmp/radiko-xml-cache/${1}_$DATE.xml"
+JST_DATE=${date '+%Y%m%d'}
+JST_TIME=${date '+%H%M%S'}
+RADIKO_XML="/tmp/${1}_${JST_DATE}.xml"
 
 # check if playing or not
 if [ -n "$MPC_OUT" ]; then
     if [[ "$MPC_OUT" = *"localhost:8080"* ]]; then
         # get program info from XML
         if [ -f "$RADIKO_XML" ]; then
-            
+            xmllint --xpath "/radiko/stations/station/progs/prog[@ft <= ${JST_TIME} and ${JST_TIME} < @to]/title/text()" ${RADIKO_XML}
         elif [ -f /tmp/last_played ]; then
             cat /tmp/last_played
         else # fail safe
-            echo "Radiko 再生中"
+            echo "radiko 再生中"
         fi
     else
         # when streaming not started or song info not loaded

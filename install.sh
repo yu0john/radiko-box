@@ -37,7 +37,8 @@ hostnamectl set-hostname radio
 # move shellscripts
 cd "$SCRIPT_DIR"
 echo "placing shellscripts..."
-chmod +x ./cgi-bin/*
+chmod a+x ./cgi-bin/get-radiko-xml.sh
+chmod a+x ./cgi-bin/*
 cp -r ./cgi-bin /usr/lib/
 
 # let nginx reboot and shutdown
@@ -91,6 +92,18 @@ cp -r ./font /var/www/html/
 
 # LED light setting
 echo "dtoverlay=gpio-led,gpio=24,label=pwr_led,trigger=timer" | sudo tee -a /boot/firmware/config.txt > /dev/null
+
+# cron setting
+crontab -l /tmp/current_cron 2>/dev/null
+
+cat << 'EOF' >> /tmp/current_cron
+CRON_TZ=Asia/Tokyo
+0 5 * * * /usr/lib/cgi-bin/get-radiko-xml.sh
+@reboot /usr/lib/cgi-bin/get-radiko-xml.sh
+EOF
+
+crontab /tmp/current_cron
+rm /tmp/current_cron
 
 echo "Configuration finished. Please reboot system."
 

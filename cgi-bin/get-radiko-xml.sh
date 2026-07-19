@@ -1,19 +1,23 @@
 #!/bin/bash
 
-# This script regularly gets XML files from radiko.jp/v3
+# This script regularly gets XML files from API radiko.jp/v3
 # and save them in purpose of reference.
 
-DATE=`date '+%Y%m%d'`
-DIRECTORY="/tmp/radiko-xml-cache"
+sleep 30
+
+RADIKO_DATE=$(/usr/lib/cgi-bin/calculate-30hours.sh)
+DATE=${RADIKO_DATE:0:8}
+DIRECTORY="/tmp"
 
 # get station ID from json file
-STATIONS=$(jq -r '.[].id // empty' /var/www/html/stationList.json)
+STATIONS=$(jq -r ".[].id // empty" /var/www/html/stationList.json)
 
 for STATION in ${STATIONS[@]}; do
     if [ -n "$STATION" ] && [ "$STATION" != "null" ]; then # remove empty name and "null" just in case
-        curl -s "https://radiko.jp/v3/program/station/date/${DATE}/${STATION}.xml" > ${DIRECTORY}/${STATION}_${DATE}.xml
+        echo "fetching ${STATION}_${DATE}.xml... to ${DIRECTORY}"
+        curl -s "https://radiko.jp/v3/program/station/date/${DATE}/${STATION}.xml" > "${DIRECTORY}/${STATION}_${DATE}.xml"
     else
-        echo "not radiko station"
+        echo "requested xml not found"
     fi
 
     sleep 1
