@@ -5,12 +5,12 @@
 
 sleep 30
 
-RADIKO_DATE=$(/usr/lib/cgi-bin/calculate-30hours.sh)
-DATE=${RADIKO_DATE:0:8}
+CALCULATED_DATE=$(/usr/lib/cgi-bin/calculate-30hours.sh)
+DATE=${CALCULATED_DATE:0:8}
 DIRECTORY="/tmp"
 
 # get station ID from json file
-STATIONS=$(./scan-stationList.sh)
+STATIONS=$(/usr/lib/cgi-bin/scan-stationList.sh)
 
 for STATION in ${STATIONS[@]}; do
     if [ -n "$STATION" ] && [ "$STATION" != "null" ]; then # remove empty name and "null" just in case

@@ -4,6 +4,7 @@ echo ""
 
 # check raw status
 MPC_OUT=$(mpc current)
+JST=$(TZ="Asia/Tokyo" date "+%Y%m%d%H%M%S")
 CALCULATED_HOURS=$(/usr/lib/cgi-bin/calculate-30hours.sh)
 RADIKO_DATE=${CALCULATED_HOURS:0:8}
 LAST_PLAYED="/tmp/last_played"
@@ -16,7 +17,7 @@ if [ -n "$MPC_OUT" ]; then
     if [[ "$MPC_OUT" = *"localhost:8080"* ]]; then
         # get program info from XML
         if [ -f "$RADIKO_XML" ]; then
-            xmllint --xpath "/radiko/stations/station/progs/prog[@ft <= ${CALCULATED_HOURS} and ${CALCULATED_HOURS} < @to]/title/text()" ${RADIKO_XML}
+            xmllint --xpath "/radiko/stations/station/progs/prog[@ft <= ${JST} and ${JST} < @to]/title/text()" ${RADIKO_XML}
         elif [ -f "$LAST_PLAYED" ] && [ -e "$RADIKO_XML" ]; then
             cat "$LAST_PLAYED"
         else # fail safe
