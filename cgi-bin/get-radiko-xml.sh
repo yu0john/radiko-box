@@ -5,7 +5,7 @@
 
 sleep 30
 
-CALCULATED_DATE=$(/usr/lib/cgi-bin/calculate-30hours.sh)
+CALCULATED_DATE=$(/usr/lib/cgi-bin/calculate-29hours.sh)
 DATE=${CALCULATED_DATE:0:8}
 DIRECTORY="/tmp"
 

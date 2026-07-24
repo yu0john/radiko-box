@@ -5,7 +5,7 @@ echo ""
 # check raw status
 MPC_OUT=$(mpc current)
 JST=$(TZ="Asia/Tokyo" date "+%Y%m%d%H%M%S")
-CALCULATED_HOURS=$(/usr/lib/cgi-bin/calculate-30hours.sh)
+CALCULATED_HOURS=$(/usr/lib/cgi-bin/calculate-29hours.sh)
 RADIKO_DATE=${CALCULATED_HOURS:0:8}
 LAST_PLAYED="/tmp/last_played"
 
