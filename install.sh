@@ -93,16 +93,20 @@ cp -r ./font /var/www/html/
 echo "dtoverlay=gpio-led,gpio=24,label=pwr_led,trigger=timer" | sudo tee -a /boot/firmware/config.txt > /dev/null
 
 # cron setting
-crontab -l /tmp/current_cron 2>/dev/null
+TEMPFILE="/tmp/radiko-box-cron-setting"
+crontab -l 2>/dev/null \
+  | grep -Fv "/usr/lib/cgi-bin/get-radiko-xml.sh" \
+  | grep -Fv "CRON_TZ=Asia/Tokyo" \
+  > "$TEMPFILE"
 
-cat << 'EOF' >> /tmp/current_cron
+cat <<'EOF' >> "$TEMPFILE"
 CRON_TZ=Asia/Tokyo
 0 5 * * * /usr/lib/cgi-bin/get-radiko-xml.sh
 @reboot /usr/lib/cgi-bin/get-radiko-xml.sh
 EOF
 
-crontab /tmp/current_cron
-rm /tmp/current_cron
+crontab "$TEMPFILE"
+
 
 echo "Configuration finished. Please reboot system."
 
