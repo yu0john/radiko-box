@@ -50,6 +50,13 @@
   },
   {
     "type": "ordinary",
+    "name": "BFM 89.9",
+    "img": "BFM899",
+    "url": "https://d2nva529xxo1me.cloudfront.net/stream",
+    "description": "BFM 89.9 The Business Station"
+  },
+  {
+    "type": "ordinary",
     "name": "weeb anime",
     "img": "weeb-anime",
     "url": "https://play.streamafrica.net/weebanimeradio",
@@ -66,14 +73,14 @@
     "type": "ordinary",
     "name": "Jazz de Ville Chill",
     "img": "Jazz-de-Ville-Chill",
-    "url": "https://onair22.xdevel.com/proxy/xautocloud_td3e_421?mp=/stream",
+    "url": "https://stream.jazzradiobymaestro.com/easy",
     "description": ""
   },
   {
     "type": "ordinary",
     "name": "Jazz de Ville Groove",
     "img": "Jazz-de-Ville-Groove",
-    "url": "https://onair22.xdevel.com/proxy/xautocloud_1kha_423?mp=/stream",
+    "url": "https://stream.jazzradiobymaestro.com/groovy",
     "description": ""
   },
   {
