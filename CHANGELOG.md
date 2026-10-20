@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - Updated URLs of Jazz de Ville due to unavailability of old ones
 
 
-## [1.1.0] - 2026-07-26
+## [1.1.0] - 2026-08-07
 
 ### Added
 - Function that retrieves XML from radiko and displays information according to time
