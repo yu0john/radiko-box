@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.1.1] - 2026-10-20
+
+### Added
+- Added a new station: BFM 89.9, a Malaysian business focused station in English
+
+### Fixed
+- Updated URLs of Jazz de Ville due to unavailability of old ones
+
+
 ## [1.1.0] - 2026-08-07
 
 ### Added
