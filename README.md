@@ -112,6 +112,8 @@ volume-control.pyの`CLK, DT, SW`をピンに対応させる。
 - [TuneIn](https://tunein.com/)
 - [asia dream radio](https://asiadreamradio.com/)
 - [SomaFM](https://somafm.com/)
-- [Jazz de Ville Radio](https://www.jazzdeville.com/)
-- [fonts](https://fonts.google.com/) 
+- [Jazz Radio by Maestro (ex Jazz de Ville)](https://www.jazzradiobymaestro.com/)
+- [BFM 89.9](https://www.bfm.my/)
+- [Nonstop Casiopea - Fusion Radio](https://nonstopcasiopea.com/)
+- [Google fonts](https://fonts.google.com/)
 </details>
