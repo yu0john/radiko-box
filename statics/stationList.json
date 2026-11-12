@@ -71,15 +71,15 @@
   },
   {
     "type": "ordinary",
-    "name": "Jazz de Ville Chill",
-    "img": "Jazz-de-Ville-Chill",
+    "name": "Jazz Radio by Maestro Easy",
+    "img": "Jazz-Radio-by-Maestro",
     "url": "https://stream.jazzradiobymaestro.com/easy",
     "description": ""
   },
   {
     "type": "ordinary",
-    "name": "Jazz de Ville Groove",
-    "img": "Jazz-de-Ville-Groove",
+    "name": "Jazz Radio by Maestro Groovy",
+    "img": "Jazz-Radio-by-Maestro",
     "url": "https://stream.jazzradiobymaestro.com/groovy",
     "description": ""
   },
@@ -103,5 +103,13 @@
     "img": "lofi-radio",
     "url": "https://play.streamafrica.net/lofiradio",
     "description": ""
+  },
+  {
+    "type": "ordinary",
+    "name": "Nonstop Casiopea",
+    "img": "Nonstop-Casiopea",
+    "url": "https://nonstopcasiopea.radioca.st/;",
+    "description": ""
   }
+
 ]
