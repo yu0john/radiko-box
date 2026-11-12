@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-<!-- ## [1.1.2] - 2026-11-01
+## [1.1.2] - 2026-11-12
 
 ### Added
 - A new station added: Nonstop Casiopea
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Jazz de Ville revised to Jazz Radio by Maestro (renewed) 
--->
+
 
 ## [1.1.1] - 2026-10-20
 
